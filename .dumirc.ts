@@ -5,11 +5,12 @@ export default defineConfig({
   themeConfig: {
     hd: { rules: [] },
     rtl: true,
-    name: 'VarioDesign',
-    footer: 'tastaien | Copyright © 2023-present',
+    name: 'VarioD',
+    logo: '/images/logo.png',
+    footer: 'VarioDesign | Copyright © 2023-present',
     prefersColor: { default: 'light', switch: true },
     socialLinks: {
-      github: 'https://github.com/tastien',
+      github: 'https://github.com/Plumliil/VarioDesign',
     },
     // nav: [
     //   { title: 'Guide', link: '/guide' },
