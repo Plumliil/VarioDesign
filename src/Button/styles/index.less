@@ -1,28 +1,77 @@
-// src/Button/styles/index.less
+@import '../../common.less';
 @import '../../variables.less';
 
-.dumi-btn {
+.vario-btn {
   font-size: 14px;
   height: 32px;
   padding: 4px 15px;
+  margin: 5px;
   border-radius: 6px;
-  transition: all .3s;
+  transition: all 0.3s;
   cursor: pointer;
 }
 
-.dumi-btn-default {
+.primary {
+  color: #fff;
+  background: @vario-primary;
+  border: 1px solid @vario-primary;
+}
+
+.default {
   background: #fff;
   color: #333;
   border: 1px solid #d9d9d9;
 
   &:hover {
-    color: @dumi-primary;
-    border-color: @dumi-primary;
+    .common-btn-hover(@vario-primary, @vario-primary, 0.8);
   }
 }
 
-.dumi-btn-primary {
+.large {
+  font-size: 16px;
+}
+
+.small {
+  font-size: 12px;
+}
+
+.vario-btn .disabled {
+  color: @vario-forbidden-text;
+  background: @vario-forbidden-bg;
+  cursor: not-allowed;
+  border: 1px solid transparent;
+}
+
+.danger {
   color: #fff;
-  background: @dumi-primary;
-  border: 1px solid @dumi-primary;
+  background: @vario-danger;
+  border: 1px solid @vario-danger;
+
+  &:hover {
+    .common-btn-hover(@vario-white, @vario-danger, 0.8, @vario-danger);
+  }
+}
+
+.link {
+  color: @vario-primary;
+  background: none;
+  border: 1px solid transparent;
+
+  &:hover {
+    .common-btn-hover(@vario-primary, @vario-white, 0.8);
+  }
+}
+
+.text {
+  background: none;
+  color: @vario-black;
+  border: 1px solid transparent;
+
+  &:hover {
+    .common-btn-hover(@vario-black, transparent, 0.8, #F5F5F5);
+  }
+}
+
+.link-danger {
+  .common-btn-link(@vario-danger);
 }

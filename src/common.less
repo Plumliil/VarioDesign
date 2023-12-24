@@ -1,0 +1,16 @@
+@import './variables.less';
+
+.common-btn-hover(@color: #fff, @BorderColor: #fff, @Opacity: 0.8, @BgColor: #fff) {
+  color: @color;
+  border-color: @BorderColor;
+  background-color: @BgColor;
+  opacity: @Opacity;
+}
+
+.common-btn-link(@color: #fff) {
+  color: @color;
+
+  &:hover {
+    .common-btn-hover(@color, @vario-white, 0.8);
+  }
+}

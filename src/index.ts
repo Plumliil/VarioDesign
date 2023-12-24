@@ -1,8 +1,4 @@
-import Start from './Start';
-// src/index.ts
 import Button from './Button';
+import Start from './Start';
 
-export {
-  Start,
-  Button
-}
+export { Button, Start };
