@@ -11,6 +11,7 @@
   "scripts": {
     "build": "father build",
     "build:watch": "father dev",
+    "deploy": "npm run docs:build && simplifyd publish",
     "dev": "dumi dev",
     "docs:build": "dumi build",
     "doctor": "father doctor",
@@ -59,6 +60,7 @@
     "prettier-plugin-packagejson": "^2.2.18",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "simplify-deploy": "^1.0.2",
     "stylelint": "^14.9.1"
   },
   "peerDependencies": {
