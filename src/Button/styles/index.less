@@ -1,27 +1,69 @@
 @import '../../variables.less';
 @button-prefix-cls: ~'@{sugar-prefix}-button';
 
-@btn-border-color: #fff;
+@btn-border-radius: @vario-radius;
+@btn-border-color: @vario-primary;
 
-@btn-normal-color: #fff;
-@btn-normal-hover-bg: #77abe4;
-@btn-normal-click-bg: #77abe4;
-@btn-normal-click-color: #77abe4;
+// normal
+@btn-normal-bg: @vario-primary;
+@btn-normal-color: @vario-white-text;
+@btn-normal-hover-bg: @vario-primary-80;
+@btn-normal-click-bg: @vario-primary-80;
+@btn-normal-click-color: @vario-white-text;
+@btn-normal-ghost-bg: @vario-info;
+@btn-normal-disable-bg: @vario-primary-40;
+@btn-normal-disable-color: @vario-forbidden-text;
 
-@btn-orange-bg: #e9b118;
-@btn-orange-color: #fff;
-@btn-orange-hover-bg: #77abe4;
-@btn-orange-click-bg: #77abe4;
-@btn-orange-click-color: #77abe4;
+// success
+@btn-success-bg: @vario-success;
+@btn-success-color: @vario-white-text;
+@btn-success-hover-bg: @vario-success-80;
+@btn-success-click-bg: @vario-success-80;
+@btn-success-click-color: @vario-white-text;
+@btn-success-disable-bg: @vario-success-40;
+@btn-success-ghost-bg: @vario-info;
+@btn-success-disable-color: @vario-forbidden-text;
 
+// info
+@btn-info-bg: @vario-info;
+@btn-info-color: @vario-white-text;
+@btn-info-hover-bg: @vario-info-80;
+@btn-info-click-bg: @vario-info-80;
+@btn-info-click-color: @vario-white-text;
+@btn-info-ghost-bg: @vario-info;
+@btn-info-disable-bg: @vario-info-40;
+@btn-info-disable-color: @vario-forbidden-text;
+
+// warning
+@btn-warning-bg: @vario-warning;
+@btn-warning-color: @vario-white-text;
+@btn-warning-hover-bg: @vario-warning-80;
+@btn-warning-click-color: @vario-white-text;
+@btn-warning-click-bg: @vario-warning-80;
+@btn-warning-ghost-bg: @vario-info;
+@btn-warning-disable-bg: @vario-warning-40;
+
+// danger
 @btn-danger-bg: @vario-danger;
-@btn-danger-color: #fff;
-@btn-danger-hover-bg: #77abe4;
-@btn-danger-click-bg: #77abe4;
-@btn-danger-click-color: #77abe4;
+@btn-danger-color: @vario-white-text;
+@btn-danger-click-color: @vario-white-text;
+@btn-danger-hover-bg: @vario-danger-80;
+@btn-danger-click-bg: @vario-danger-80;
+@btn-danger-ghost-bg: @vario-info;
+@btn-danger-disable-bg: @vario-danger-40;
 
-@btn-anti-main-bg: #fff;
-@btn-anti-main-hover-bg: #fff;
+// anti
+@btn-anti-main-color: red;
+@btn-anti-main-bg: red;
+@btn-anti-main-click-bg: red;
+@btn-anti-main-hover-bg: red;
+@btn-anti-main-disable-bg: red;
+@btn-anti-secondary-hover-bg: red;
+@btn-anti-secondary-color: red;
+@btn-anti-secondary-click-bg: red;
+@btn-anti-secondary-disable-bg: red;
+@btn-anti-secondary-bg: red;
+@White: @vario-white-text;
 
 @B-40-t: #fff;
 @B-50-t: #fff;
@@ -29,23 +71,6 @@
 @W-30-t: #fff;
 @W-50-t: #fff;
 @W-80-t: #fff;
-
-@btn-anti-main-click-bg: #fff;
-@btn-anti-secondary-color: #fff;
-@btn-anti-main-color: @vario-primary;
-@btn-orange-ghost-bg: @vario-info;
-@btn-danger-ghost-bg: @vario-danger;
-@btn-anti-secondary-hover-bg: #fff;
-@btn-anti-secondary-click-bg: #fff;
-@btn-anti-main-disable-bg: #fff;
-@btn-anti-secondary-disable-bg: #fff;
-
-@btn-normal-disable-color: #fff;
-@btn-normal-disable-bg: #fff;
-@btn-orange-disable-bg: #fff;
-@btn-danger-disable-bg: #fff;
-
-@btn-anti-secondary-bg: gray;
 
 @button-sm-width: 56px;
 @button-md-width: 96px;
@@ -69,15 +94,116 @@
 
 // 样式优先级 ghost/antiWhite > color
 
+.common-state-style(@color, @bgColor, @hbgColor, @clickColor, @clickBgColor) {
+  color: @color;
+  background-color: @bgColor;
+
+  &:hover {
+    background-color: @hbgColor;
+  }
+
+  &:active {
+    color: @clickColor;
+    background-color: @clickBgColor;
+  }
+
+  &:focus {
+    background-color: @btn-normal-bg;
+  }
+}
+
+.common-link-style(@color, @hoverColor) {
+  // color: @color;
+  color: red;
+  // background: none !important;
+  border: 1px solid transparent;
+
+  // &:hover {
+  //   background: none !important;
+  //   color: @hoverColor;
+  //   color: red;
+  //   border: 1px solid transparent;
+  // }
+
+  // &:active {
+  //   color: @hoverColor;
+  //   background: none;
+  // }
+}
+
+.common-ghost-style(@color, @hoverColor) {
+  color: @color;
+  background: none;
+  border: 1px solid @color;
+
+  &:hover {
+    background: none;
+    color: @hoverColor;
+    border: 1px solid @hoverColor;
+  }
+
+  &:active {
+    color: @hoverColor;
+    background: none;
+  }
+}
+
+.common-disabled-style(@color, @bgColor) {
+  color: @color;
+  background-color: @bgColor;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: @bgColor;
+  }
+}
+
 // 平常状态
 .@{button-prefix-cls} {
   position: relative;
   text-align: center;
   display: inline-block; // min-width生效
   box-sizing: border-box;
+  border-radius: @btn-border-radius;
   cursor: pointer;
+  margin: 5px;
   user-select: none;
-  border-radius: @vario-radius;
+  transition: all @vario-transition;
+
+  // &-main {
+  //   background-color: pink;
+  // }
+
+  // 链接
+  &-link {
+    color: @vario-primary;
+    background: none;
+    border: 1px solid transparent;
+
+    &-normal {
+      // background: none;
+      // .common-state-style(red, @btn-normal-bg, @btn-normal-hover-bg, @btn-normal-click-color, @btn-normal-click-bg)
+
+      .common-link-style(@btn-normal-color, @btn-normal-hover-bg);
+    }
+
+    &-success {
+      .common-link-style(@btn-success-color, @btn-success-hover-bg);
+    }
+
+    &-info {
+      .common-link-style(@btn-info-color, @btn-info-hover-bg);
+    }
+
+    &-danger {
+      .common-link-style(@btn-danger-color, @btn-danger-hover-bg);
+    }
+
+    &-warning {
+      .common-link-style(@btn-warning-color, @btn-warning-hover-bg);
+    }
+  }
 
   // 大小
   &-small {
@@ -112,61 +238,25 @@
     font-size: @button-xl-font-size;
   }
 
-  // // 色调
+  // 色调
   &-normal {
-    color: @btn-normal-color;
-    background-color: @vario-primary;
-    border: 1px solid @btn-border-color;
-
-    &:hover {
-      border: 1px solid @btn-normal-hover-bg;
-      background-color: @btn-normal-hover-bg;
-    }
-
-    &:active {
-      border: 1px solid @btn-normal-click-bg;
-      color: @btn-normal-click-color;
-      background-color: @btn-normal-click-bg;
-    }
-
-    &:focus {
-      border: 1px solid @vario-primary;
-      background-color: @vario-primary;
-    }
+    .common-state-style(@btn-normal-color, @btn-normal-bg, @btn-normal-hover-bg, @btn-normal-click-color, @btn-normal-click-bg);
   }
 
-  &-orange {
-    color: @btn-orange-color;
-    background-color: @btn-orange-bg;
+  &-success {
+    .common-state-style(@btn-success-color, @btn-success-bg, @btn-success-hover-bg, @btn-success-click-color, @btn-success-click-bg);
+  }
 
-    &:hover {
-      background-color: @btn-orange-hover-bg;
-    }
-
-    &:active {
-      background-color: @btn-orange-click-bg;
-    }
-
-    &:focus {
-      background-color: @btn-orange-bg;
-    }
+  &-warning {
+    .common-state-style(@btn-warning-color, @btn-warning-bg, @btn-warning-hover-bg, @btn-warning-click-color, @btn-warning-click-bg);
   }
 
   &-danger {
-    color: @btn-danger-color;
-    background-color: @btn-danger-bg;
+    .common-state-style(@btn-danger-color, @btn-danger-bg, @btn-danger-hover-bg, @btn-danger-click-color, @btn-danger-click-bg);
+  }
 
-    &:hover {
-      background-color: @btn-danger-hover-bg;
-    }
-
-    &:active {
-      background-color: @btn-danger-click-bg;
-    }
-
-    &:focus {
-      background-color: @btn-danger-bg;
-    }
+  &-info {
+    .common-state-style(@btn-info-color, @btn-info-bg, @btn-info-hover-bg, @btn-info-click-color, @btn-info-click-bg);
   }
 
   // 按钮宽度调整为父宽度
@@ -177,336 +267,66 @@
 
   // 幽灵
   &-ghost {
-    background-color: @vario-primary;
-    border: 1px solid @btn-border-color;
-
     &-normal {
-      color: red;
-
-      &:hover {
-        background-color: @btn-normal-hover-bg;
-      }
-
-      &:active {
-        background-color: @btn-normal-click-bg;
-      }
+      .common-ghost-style(@btn-normal-color, @btn-normal-hover-bg);
     }
 
-    &-orange {
-      color: @btn-orange-bg;
+    &-success {
+      .common-ghost-style(@btn-success-color, @btn-success-hover-bg);
+    }
 
-      &:hover {
-        background-color: @btn-normal-hover-bg;
-      }
-
-      &:active {
-        color: @btn-orange-click-bg;
-        background-color: @btn-orange-ghost-bg;
-      }
+    &-info {
+      .common-ghost-style(@btn-info-color, @btn-info-hover-bg);
     }
 
     &-danger {
-      color: @btn-danger-bg;
+      .common-ghost-style(@btn-danger-color, @btn-danger-hover-bg);
+    }
 
-      &:hover {
-        background-color: @btn-normal-hover-bg;
-      }
-
-      &:active {
-        color: @btn-danger-click-bg;
-        background-color: @btn-danger-ghost-bg;
-      }
+    &-warning {
+      .common-ghost-style(@btn-warning-color, @btn-warning-hover-bg);
     }
   }
 
-  // 主按钮+反白
-  &-antiwhite-main {
-    color: @btn-anti-main-color;
-    background-color: @btn-anti-main-bg;
-
-    &:hover {
-      color: @btn-anti-main-color;
-      background-color: @btn-anti-main-hover-bg;
-    }
-
-    &:active {
-      color: @B-40-t;
-      background-color: @btn-anti-main-click-bg;
-    }
-  }
-
-  // 次按钮+反白
-  &-antiwhite-secondary {
-    color: @btn-anti-secondary-color;
-    border: 1px solid @vario-white;
-    background-color: @btn-anti-secondary-bg;
-
-    &:hover {
-      color: @btn-anti-secondary-color;
-      border: 1px solid @W-80-t;
-      background-color: @btn-anti-secondary-hover-bg;
-    }
-
-    &:active {
-      color: @btn-anti-secondary-color;
-      border: 1px solid @W-50-t;
-      background-color: @btn-anti-secondary-click-bg;
-    }
-  }
-
-  // disabled
+  // 禁用
   &-disabled {
     cursor: not-allowed;
     color: @btn-normal-disable-color;
     background-color: @btn-normal-disable-bg;
 
-    &-orange {
-      color: @btn-orange-color;
-      background-color: @btn-orange-disable-bg;
+    &-normal {
+      .common-disabled-style(@btn-normal-color, @btn-normal-disable-bg);
+    }
 
-      &:hover,
-      &:active,
-      &:focus {
-        background-color: @btn-orange-disable-bg;
-      }
+    &-success {
+      .common-disabled-style(@btn-success-color, @btn-success-disable-bg);
+    }
+
+    &-warning {
+      .common-disabled-style(@btn-warning-color, @btn-warning-disable-bg);
     }
 
     &-danger {
-      color: @btn-danger-color;
-      background-color: @btn-danger-disable-bg;
+      .common-disabled-style(@btn-danger-color, @btn-danger-disable-bg);
+    }
 
-      &:hover,
-      &:active,
-      &:focus {
-        background-color: @btn-danger-disable-bg;
-      }
+    &-info {
+      .common-disabled-style(@btn-info-color, @btn-info-disable-bg);
     }
 
     &-ghost {
       color: @btn-normal-disable-color;
-      background-color: @btn-normal-disable-bg;
+      background: none;
+      border: 1px solid @vario-forbidden-text;
 
       &:hover,
       &:active,
       &:focus {
         color: @btn-normal-disable-color;
-        background-color: @btn-normal-disable-bg;
-      }
-    }
-
-    &-antiwhite-main {
-      color: @W-20-t;
-      background-color: @btn-anti-main-disable-bg;
-
-      &:hover,
-      &:active,
-      &:focus {
-        color: @W-20-t;
-        background-color: @btn-anti-main-disable-bg;
-      }
-    }
-
-    &-antiwhite-secondary {
-      color: @W-30-t;
-      border: 1px solid @W-30-t;
-      background-color: @btn-anti-secondary-disable-bg;
-
-      &:hover,
-      &:active,
-      &:focus {
-        color: @W-30-t;
-        border: 1px solid @W-30-t;
-        background-color: @btn-anti-secondary-disable-bg;
+        // background-color: @btn-normal-disable-bg;
+        border: 1px solid @vario-forbidden-text;
+        background: none;
       }
     }
   }
 }
-
-// 组合按钮
-// .@{button-group-prefix-cls} {
-//   // 组合下的Button边框都去掉
-//   .@{button-prefix-cls} {
-//     border: none;
-//     border-radius: 0;
-//   }
-//   // 重新设置边框及圆角
-//   &-default {
-//     .@{button-prefix-cls} {
-//       &:first-child {
-//         border-top-left-radius: 2px;
-//         border-bottom-left-radius: 2px;
-//       }
-//       &:last-child {
-//         border-top-right-radius: 2px;
-//         border-bottom-right-radius: 2px;
-//       }
-//     }
-//   }
-//   &-circle {
-//     .@{button-prefix-cls} {
-//       &:first-child {
-// border-top-left-radius: @btn-border-radius;
-// border-bottom-left-radius: @btn-border-radius;
-//       }
-//       &:last-child {
-// border-top-right-radius: @btn-border-radius;
-// border-bottom-right-radius: @btn-border-radius;
-//       }
-//     }
-//   }
-//   // 解决组件大小组合使得高度、宽度不一致问题
-//   &-small {
-//     .@{button-prefix-cls} {
-//       min-width: @button-sm-width;
-//       height: @button-sm-height;
-//       line-height: @button-sm-height;
-//       font-size: @button-sm-font-size;
-//     }
-//   }
-//   &-middle {
-//     .@{button-prefix-cls} {
-//       min-width: @button-md-width;
-//       height: @button-md-height;
-//       line-height: @button-md-height;
-//       font-size: @button-md-font-size;
-//     }
-//   }
-//   &-large {
-//     .@{button-prefix-cls} {
-//       min-width: @button-lg-width;
-//       height: @button-lg-height;
-//       line-height: @button-lg-height;
-//       font-size: @button-lg-font-size;
-//     }
-//   }
-//   &-thumb {
-//     .@{button-prefix-cls} {
-//       min-width: @button-xl-width;
-//       height: @button-xl-height;
-//       line-height: @button-xl-height;
-//       font-size: @button-xl-font-size;
-//     }
-//   }
-
-//   &-border {
-//     border: 1px solid @btn-border-color;
-//   }
-//   &:not(:first-child):not(:last-child) {
-//     border-right-color: @btn-border-color;
-//     border-left-color: @btn-border-color;
-//   }
-//   &:first-child {
-//     &:not(:last-child) {
-//       border-right-color: @btn-border-color;
-//     }
-//   }
-//   &:last-child:not(:first-child),
-//   & + & {
-//     border-left-color: @btn-border-color;
-//   }
-// }
-
-// @import '../../common.less';
-// @import '../../variables.less';
-
-// .vario-btn {
-//   font-size: 14px;
-//   height: 32px;
-//   padding: 4px 16px;
-//   margin: 5px;
-//   transition: all 0.3s;
-//   cursor: pointer;
-// }
-
-// .radius {
-//   border-radius: 6px;
-// }
-
-// .round {
-
-// }
-
-// .circle {
-//   text-indent: -6px;
-//   padding: 0;
-//   width: 32px;
-//   height: 32px;
-//   border-radius: 50%;
-//   overflow: hidden;
-//   overflow: hidden;
-//   color: black;
-// }
-
-// .primary {
-//   color: #fff;
-//   background: @vario-primary;
-//   border: 1px solid @vario-primary;
-// }
-
-// .default {
-//   background: #fff;
-//   color: #333;
-//   border: 1px solid #d9d9d9;
-
-//   &:hover {
-//     .common-btn-hover(@vario-primary, @vario-primary, 0.8);
-//   }
-// }
-
-// .large {
-//   height: 36px;
-//   padding: 6px 24px;
-//   font-size: 16px;
-// }
-
-// .middle {
-//   padding: 4px 16px;
-//   font-size: 14px;
-// }
-
-// .small {
-//   height: 28px;
-//   padding: 2px 8px;
-//   font-size: 12px;
-// }
-
-// .vario-btn .disabled {
-//   color: @vario-forbidden-text;
-//   background: @vario-forbidden-bg;
-//   cursor: not-allowed;
-//   border: 1px solid transparent;
-// }
-
-// .danger {
-//   color: #fff;
-//   background: @vario-danger;
-//   border: 1px solid @vario-danger;
-
-//   &:hover {
-//     .common-btn-hover(@vario-white, @vario-danger, 0.8, @vario-danger);
-//   }
-// }
-
-// .link {
-//   color: @vario-primary;
-//   background: none;
-//   border: 1px solid transparent;
-
-//   &:hover {
-//     .common-btn-hover(@vario-primary, @vario-white, 0.8);
-//   }
-// }
-
-// .text {
-//   background: none;
-//   color: @vario-black;
-//   border: 1px solid transparent;
-
-//   &:hover {
-//     .common-btn-hover(@vario-black, transparent, 0.8, #F5F5F5);
-//   }
-// }
-
-// .link-danger {
-//   .common-btn-link(@vario-danger);
-// }

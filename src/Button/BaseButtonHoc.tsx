@@ -2,18 +2,19 @@ import classNames from 'classnames';
 import * as React from 'react';
 import { ConfigConsumer, ConfigConsumerProps } from '../../config-provider';
 import ButtonGroup from './ButtonGroup';
-export type TypeMaps = 'main' | 'secondary';
+export type TypeMaps = 'main' | 'secondary' | 'link';
 export type ColorMaps = 'normal' | 'orange' | 'danger';
-export type SizeMaps = 'small' | 'middle' | 'large' | 'thumb';
+export type SizeMaps = 'small' | 'middle' | 'large';
+export type StateMaps = 'normal' | 'danger' | 'warning' | 'info' | 'success';
 
 export interface BaseButtonHocProps {
   prefixCls?: string;
   className?: string;
   size?: SizeMaps;
   type?: TypeMaps;
+  state?: StateMaps;
   color?: ColorMaps;
   ghost?: boolean;
-  antiWhite?: boolean;
   block?: boolean;
   disabled?: boolean;
   style?: React.CSSProperties;
@@ -48,9 +49,9 @@ const BaseButtonHoc = <P extends object>(
         className,
         size = 'middle',
         type = 'main',
-        color = 'normal',
+        // color = 'normal',
+        state = 'normal',
         ghost = false,
-        antiWhite = false,
         block = false,
         style,
         disabled = false,
@@ -59,16 +60,19 @@ const BaseButtonHoc = <P extends object>(
       // 样式规则 style > disabled > antiWhite > ghost > color
       const classString = classNames(prefixCls, className, {
         [`${prefixCls}-${size}`]: true,
+        // [`${prefixCls}-${color}`]: true,
+        [`${prefixCls}-${state}`]: true,
         [`${prefixCls}-${type}`]: true,
-        [`${prefixCls}-${color}`]: true,
+        // [`${prefixCls}-${color}`]: true,
         [`${prefixCls}-block`]: block,
         [`${prefixCls}-ghost`]: ghost,
-        [`${prefixCls}-ghost-${color}`]: !!color && ghost,
-        [`${prefixCls}-antiwhite-${type}`]: !!type && antiWhite,
+        // [`${prefixCls}-ghost-${color}`]: !!color && ghost,
+        [`${prefixCls}-${type}-${state}`]: !!state && !!type,
+        [`${prefixCls}-ghost-${state}`]: !!state && ghost,
         [`${prefixCls}-disabled`]: disabled,
-        [`${prefixCls}-disabled-${color}`]: disabled && !!color, // 主题色按钮的禁止
+        // [`${prefixCls}-disabled-${color}`]: disabled && !!color, // 主题色按钮的禁止
+        [`${prefixCls}-disabled-${state}`]: disabled && !!state, // 主题色按钮的禁止
         [`${prefixCls}-disabled-ghost`]: disabled && ghost, // 幽灵按钮的禁止
-        [`${prefixCls}-disabled-antiwhite-${type}`]: disabled && antiWhite, // 反白按钮的禁止
       });
       const cssStyle: React.CSSProperties = style
         ? { ...style, lineHeight: style && style.height }

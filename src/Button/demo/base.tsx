@@ -5,30 +5,91 @@ const App: React.FC = () => {
   return (
     <>
       <Button type="main">默认按钮</Button>
-      {/* <Button type="primary">主要按钮</Button>
-      <Button danger>危险按钮</Button>
+      <Button type="main" state="success">
+        默认按钮
+      </Button>
+      <Button type="main" state="info">
+        默认按钮
+      </Button>
+      <Button type="main" state="warning">
+        警告按钮
+      </Button>
+      <Button type="main" state="danger">
+        危险按钮
+      </Button>
       <br />
-      <Button type="text">Text</Button>
-      <Button type="link">Link</Button>
-      <Button type="link" danger>Danger Link</Button>
       <br />
-      <Button type="primary" disabled>
+      <div
+        style={{
+          backgroundColor: 'black',
+        }}
+      >
+        <Button type="main" ghost>
+          幽灵按钮
+        </Button>
+        <Button type="main" state="success" ghost>
+          幽灵按钮
+        </Button>
+        <Button type="main" state="info" ghost>
+          幽灵按钮
+        </Button>
+        <Button type="main" state="warning" ghost>
+          幽灵按钮
+        </Button>
+        <Button type="main" state="danger" ghost>
+          幽灵按钮
+        </Button>
+      </div>
+      <br />
+      <Button type="main" disabled>
         禁用按钮
       </Button>
-      <Button type="link" disabled>
-        Danger Link
+      <Button type="main" state="success" disabled>
+        禁用按钮
+      </Button>
+      <Button type="main" state="info" disabled>
+        禁用按钮
+      </Button>
+      <Button type="main" state="warning" disabled>
+        禁用按钮
+      </Button>
+      <Button type="main" state="danger" disabled>
+        禁用按钮
+      </Button>
+      <Button type="main" state="danger" disabled ghost>
+        禁用按钮
       </Button>
       <br />
-      <Button type="default" size='small'>默认按钮</Button>
       <br />
-      <Button type="default">默认按钮</Button>
+      <Button type="link">Link</Button>
+      <Button type="link" state="success">
+        Link
+      </Button>
+      <Button type="link" state="info">
+        Link
+      </Button>
+      <Button type="link" state="warning">
+        Link
+      </Button>
+      <Button type="link" state="danger">
+        Link
+      </Button>
+      <Button type="link" state="danger">
+        Link
+      </Button>
       <br />
-      <Button type="default" size='large'>默认按钮</Button>
+      <Button type="main" size="small">
+        默认按钮
+      </Button>
       <br />
+      <Button type="main" size="middle">
+        默认按钮
+      </Button>
       <br />
-      <Button type="primary" radius>默认按钮</Button>
-      <Button type="primary" size='small' radius shape='circle'>默认按钮</Button>
-      <Button type="primary" size='large' radius shape='circle'>默认按钮</Button> */}
+      <Button type="main" size="large">
+        默认按钮
+      </Button>
+      <br />
       <br />
     </>
   );
