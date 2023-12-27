@@ -7,6 +7,7 @@
 // normal
 @btn-normal-bg: @vario-primary;
 @btn-normal-color: @vario-white-text;
+@btn-normal-link-color: @vario-primary;
 @btn-normal-hover-bg: @vario-primary-80;
 @btn-normal-click-bg: @vario-primary-80;
 @btn-normal-click-color: @vario-white-text;
@@ -17,6 +18,7 @@
 // success
 @btn-success-bg: @vario-success;
 @btn-success-color: @vario-white-text;
+@btn-success-link-color: @vario-success;
 @btn-success-hover-bg: @vario-success-80;
 @btn-success-click-bg: @vario-success-80;
 @btn-success-click-color: @vario-white-text;
@@ -27,6 +29,7 @@
 // info
 @btn-info-bg: @vario-info;
 @btn-info-color: @vario-white-text;
+@btn-info-link-color: @vario-info;
 @btn-info-hover-bg: @vario-info-80;
 @btn-info-click-bg: @vario-info-80;
 @btn-info-click-color: @vario-white-text;
@@ -37,6 +40,7 @@
 // warning
 @btn-warning-bg: @vario-warning;
 @btn-warning-color: @vario-white-text;
+@btn-warning-link-color: @vario-warning;
 @btn-warning-hover-bg: @vario-warning-80;
 @btn-warning-click-color: @vario-white-text;
 @btn-warning-click-bg: @vario-warning-80;
@@ -46,6 +50,7 @@
 // danger
 @btn-danger-bg: @vario-danger;
 @btn-danger-color: @vario-white-text;
+@btn-danger-link-color: @vario-danger;
 @btn-danger-click-color: @vario-white-text;
 @btn-danger-hover-bg: @vario-danger-80;
 @btn-danger-click-bg: @vario-danger-80;
@@ -112,23 +117,38 @@
   }
 }
 
-.common-link-style(@color, @hoverColor) {
-  // color: @color;
-  color: red;
-  // background: none !important;
-  border: 1px solid transparent;
+.common-secondary-state-style(@color) {
+  color: @color;
+  background-color: none;
+  border: 1px solid @color;
 
   // &:hover {
-  //   background: none !important;
-  //   color: @hoverColor;
-  //   color: red;
-  //   border: 1px solid transparent;
+  //   background-color: @hbgColor;
   // }
 
   // &:active {
-  //   color: @hoverColor;
-  //   background: none;
+  //   color: @clickColor;
+  //   background-color: @clickBgColor;
   // }
+
+  // &:focus {
+  //   background-color: @btn-normal-bg;
+  // }
+}
+
+.common-link-style(@color, @hoverColor) {
+  color: @color;
+  border: 1px solid transparent;
+
+  &:hover {
+    color: @hoverColor;
+    border: 1px solid transparent;
+  }
+
+  &:active {
+    color: @hoverColor;
+    background: none;
+  }
 }
 
 .common-ghost-style(@color, @hoverColor) {
@@ -159,55 +179,37 @@
   }
 }
 
+.common-circle-style(@height, @fontSize) {
+  min-width: @height;
+  max-width: @height;
+  text-align: center;
+  height: @height;
+  line-height: @height;
+  padding: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  font-size: @fontSize;
+}
+
 // 平常状态
 .@{button-prefix-cls} {
   position: relative;
   text-align: center;
   display: inline-block; // min-width生效
   box-sizing: border-box;
-  border-radius: @btn-border-radius;
   cursor: pointer;
-  margin: 5px;
   user-select: none;
   transition: all @vario-transition;
+  border: 1px solid transparent;
+  margin: 5px;
 
-  // &-main {
-  //   background-color: pink;
-  // }
-
-  // 链接
-  &-link {
-    color: @vario-primary;
-    background: none;
-    border: 1px solid transparent;
-
-    &-normal {
-      // background: none;
-      // .common-state-style(red, @btn-normal-bg, @btn-normal-hover-bg, @btn-normal-click-color, @btn-normal-click-bg)
-
-      .common-link-style(@btn-normal-color, @btn-normal-hover-bg);
-    }
-
-    &-success {
-      .common-link-style(@btn-success-color, @btn-success-hover-bg);
-    }
-
-    &-info {
-      .common-link-style(@btn-info-color, @btn-info-hover-bg);
-    }
-
-    &-danger {
-      .common-link-style(@btn-danger-color, @btn-danger-hover-bg);
-    }
-
-    &-warning {
-      .common-link-style(@btn-warning-color, @btn-warning-hover-bg);
-    }
+  &-radius {
+    border-radius: @btn-border-radius;
   }
 
   // 大小
   &-small {
-    min-width: @button-sm-width;
+    min-width: @button-sm-height;
     height: @button-sm-height;
     line-height: @button-sm-height;
     padding: 0 @button-sm-padding;
@@ -215,7 +217,7 @@
   }
 
   &-middle {
-    min-width: @button-md-width;
+    min-width: @button-md-height;
     height: @button-md-height;
     line-height: @button-md-height;
     padding: 0 @button-md-padding;
@@ -223,7 +225,7 @@
   }
 
   &-large {
-    min-width: @button-lg-width;
+    min-width: @button-lg-height;
     height: @button-lg-height;
     line-height: @button-lg-height;
     padding: 0 @button-lg-padding;
@@ -231,32 +233,119 @@
   }
 
   &-thumb {
-    min-width: @button-xl-width;
+    min-width: @button-xl-height;
     height: @button-xl-height;
     line-height: @button-xl-height;
     padding: 0 @button-xl-padding;
     font-size: @button-xl-font-size;
   }
 
-  // 色调
-  &-normal {
-    .common-state-style(@btn-normal-color, @btn-normal-bg, @btn-normal-hover-bg, @btn-normal-click-color, @btn-normal-click-bg);
+  // 主要
+  &-main {
+    &-normal {
+      .common-state-style(@btn-normal-color, @btn-normal-bg, @btn-normal-hover-bg, @btn-normal-click-color, @btn-normal-click-bg);
+    }
+
+    &-success {
+      .common-state-style(@btn-success-color, @btn-success-bg, @btn-success-hover-bg, @btn-success-click-color, @btn-success-click-bg);
+    }
+
+    &-warning {
+      .common-state-style(@btn-warning-color, @btn-warning-bg, @btn-warning-hover-bg, @btn-warning-click-color, @btn-warning-click-bg);
+    }
+
+    &-danger {
+      .common-state-style(@btn-danger-color, @btn-danger-bg, @btn-danger-hover-bg, @btn-danger-click-color, @btn-danger-click-bg);
+    }
+
+    &-info {
+      .common-state-style(@btn-info-color, @btn-info-bg, @btn-info-hover-bg, @btn-info-click-color, @btn-info-click-bg);
+    }
   }
 
-  &-success {
-    .common-state-style(@btn-success-color, @btn-success-bg, @btn-success-hover-bg, @btn-success-click-color, @btn-success-click-bg);
+  // 次要
+  &-secondary {
+    &-normal {
+      .common-secondary-state-style(@btn-normal-link-color);
+    }
+
+    &-success {
+      .common-secondary-state-style(@btn-success-link-color);
+    }
+
+    &-warning {
+      .common-secondary-state-style(@btn-warning-link-color);
+    }
+
+    &-danger {
+      .common-secondary-state-style(@btn-danger-link-color);
+    }
+
+    &-info {
+      .common-secondary-state-style(@btn-info-link-color);
+    }
   }
 
-  &-warning {
-    .common-state-style(@btn-warning-color, @btn-warning-bg, @btn-warning-hover-bg, @btn-warning-click-color, @btn-warning-click-bg);
+  // 链接
+  &-link {
+    background: none;
+    border: 1px solid transparent;
+
+    &-normal {
+      .common-link-style(@btn-normal-link-color, @btn-normal-hover-bg);
+    }
+
+    &-success {
+      .common-link-style(@btn-success-link-color, @btn-success-hover-bg);
+    }
+
+    &-info {
+      .common-link-style(@btn-info-link-color, @btn-info-hover-bg);
+    }
+
+    &-danger {
+      .common-link-style(@btn-danger-link-color, @btn-danger-hover-bg);
+    }
+
+    &-warning {
+      .common-link-style(@btn-warning-link-color, @btn-warning-hover-bg);
+    }
   }
 
-  &-danger {
-    .common-state-style(@btn-danger-color, @btn-danger-bg, @btn-danger-hover-bg, @btn-danger-click-color, @btn-danger-click-bg);
+  &-round {
+    &-small {
+      border-radius: 9999px;
+    }
+
+    &-middle {
+      border-radius: 9999px;
+    }
+
+    &-large {
+      border-radius: 9999px;
+    }
+
+    &-thumb {
+      border-radius: 9999px;
+    }
   }
 
-  &-info {
-    .common-state-style(@btn-info-color, @btn-info-bg, @btn-info-hover-bg, @btn-info-click-color, @btn-info-click-bg);
+  &-circle {
+    &-small {
+      .common-circle-style(@button-sm-height, @button-sm-font-size);
+    }
+
+    &-middle {
+      .common-circle-style(@button-md-height, @button-md-font-size);
+    }
+
+    &-large {
+      .common-circle-style(@button-lg-height, @button-lg-font-size);
+    }
+
+    &-thumb {
+      .common-circle-style(@button-xl-height, @button-xl-font-size);
+    }
   }
 
   // 按钮宽度调整为父宽度

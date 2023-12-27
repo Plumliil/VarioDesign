@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import { ConfigConsumer, ConfigConsumerProps } from '../../config-provider';
-import ButtonGroup from './ButtonGroup';
+// import ButtonGroup from './ButtonGroup';
 export type TypeMaps = 'main' | 'secondary' | 'link';
 export type ColorMaps = 'normal' | 'orange' | 'danger';
 export type SizeMaps = 'small' | 'middle' | 'large';
+export type ShapeMaps = 'default' | 'circle' | 'round';
 export type StateMaps = 'normal' | 'danger' | 'warning' | 'info' | 'success';
 
 export interface BaseButtonHocProps {
@@ -13,9 +14,11 @@ export interface BaseButtonHocProps {
   size?: SizeMaps;
   type?: TypeMaps;
   state?: StateMaps;
+  radius?: boolean;
   color?: ColorMaps;
   ghost?: boolean;
   block?: boolean;
+  shape?: ShapeMaps;
   disabled?: boolean;
   style?: React.CSSProperties;
   onClick?: () => void;
@@ -30,7 +33,7 @@ const BaseButtonHoc = <P extends object>(
   WrapperComponent: React.ComponentType<P>,
 ) => {
   return class extends React.Component<P & BaseButtonHocProps> {
-    static Group: typeof ButtonGroup;
+    // static Group: typeof ButtonGroup;
     // eslint-disable-next-line @typescript-eslint/no-useless-constructor
     constructor(
       props: (P & BaseButtonHocProps) | Readonly<P & BaseButtonHocProps>,
@@ -49,28 +52,27 @@ const BaseButtonHoc = <P extends object>(
         className,
         size = 'middle',
         type = 'main',
-        // color = 'normal',
+        radius = false,
         state = 'normal',
         ghost = false,
         block = false,
+        shape = 'default',
         style,
         disabled = false,
       } = this.props;
       const prefixCls = getPrefixCls('button', customizePrefixCls);
       // 样式规则 style > disabled > antiWhite > ghost > color
       const classString = classNames(prefixCls, className, {
-        [`${prefixCls}-${size}`]: true,
-        // [`${prefixCls}-${color}`]: true,
-        [`${prefixCls}-${state}`]: true,
-        [`${prefixCls}-${type}`]: true,
-        // [`${prefixCls}-${color}`]: true,
+        [`${prefixCls}-radius`]: radius,
         [`${prefixCls}-block`]: block,
         [`${prefixCls}-ghost`]: ghost,
-        // [`${prefixCls}-ghost-${color}`]: !!color && ghost,
+        [`${prefixCls}-${size}`]: true,
+        [`${prefixCls}-${state}`]: true,
+        [`${prefixCls}-${type}`]: true,
+        [`${prefixCls}-${shape}-${size}`]: shape,
         [`${prefixCls}-${type}-${state}`]: !!state && !!type,
         [`${prefixCls}-ghost-${state}`]: !!state && ghost,
         [`${prefixCls}-disabled`]: disabled,
-        // [`${prefixCls}-disabled-${color}`]: disabled && !!color, // 主题色按钮的禁止
         [`${prefixCls}-disabled-${state}`]: disabled && !!state, // 主题色按钮的禁止
         [`${prefixCls}-disabled-ghost`]: disabled && ghost, // 幽灵按钮的禁止
       });
